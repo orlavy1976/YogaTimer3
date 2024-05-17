@@ -125,19 +125,20 @@ const ExerciseDetails = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{exercise.name}</Text>
-      <TouchableOpacity style={styles.runButton} onPress={running ? stopExercise : startExercise} disabled={!timers.length}>
-        {!running ?
-          <>
-            <Icon name="play-outline" size={24} color="#fff" />
-            <Text style={styles.buttonText}>Run</Text>
-          </> :
-          <>
-            <Icon name="stop-outline" size={24} color="#fff" />
-            <Text style={styles.buttonText}>Stop</Text>
-          </>
-        }
-
-      </TouchableOpacity>
+      <View style={{ display: timers.length ? 'block' : 'none' }}>
+        <TouchableOpacity style={styles.runButton} onPress={running ? stopExercise : startExercise}>
+          {!running ?
+            <>
+              <Icon name="play-outline" size={24} color="#fff" />
+              <Text style={styles.buttonText}>Start</Text>
+            </> :
+            <>
+              <Icon name="stop-outline" size={24} color="#fff" />
+              <Text style={styles.buttonText}>Stop</Text>
+            </>
+          }
+        </TouchableOpacity>
+      </View>
       <TextInput
         style={styles.input}
         value={name}
@@ -154,8 +155,10 @@ const ExerciseDetails = ({ route, navigation }) => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.timerItem}>
-            <Text style={styles.timerDetail}>Duration: {running && item.id == timerRef.current?.id ? `${remainingTime}/${item.duration}` : item.duration}s</Text>
-            <Text style={styles.timerDetail}>Loop: {running && item.id == timerRef.current?.id ? `${currentLoop}/${item.loop}` : `${item.loop} times`}</Text>
+            <View>
+              <Text style={styles.timerDetail}>Duration: {running && item.id == timerRef.current?.id ? `${remainingTime}/${item.duration}` : item.duration}s</Text>
+              <Text style={styles.timerDetail}>Loop: {running && item.id == timerRef.current?.id ? `${currentLoop}/${item.loop}` : `${item.loop} times`}</Text>
+            </View>
             <View style={styles.buttonContainer}>
               <TouchableOpacity
                 style={styles.iconButton}

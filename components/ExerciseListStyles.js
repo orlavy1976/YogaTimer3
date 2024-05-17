@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
     marginTop: 6,
   },
   iconButton: {
-    backgroundColor: '#a2836e',
+    backgroundColor: '#b2947b',
     padding: 10,
     borderRadius: 8,
     marginHorizontal: 5,

@@ -10,7 +10,7 @@ export default function StackNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="ExerciseList" component={ExerciseList} options={{ title: 'Complex Timer' }} />
+        <Stack.Screen name="ExerciseList" component={ExerciseList} options={{ title: 'Yoga Timer' }} />
         <Stack.Screen name="ExerciseDetails" component={ExerciseDetails} options={{ title: 'Exercise Details' }} />
         <Stack.Screen name="TimerDetails" component={TimerDetails} options={{ title: 'Timer Details' }} />
       </Stack.Navigator>

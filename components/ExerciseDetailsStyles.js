@@ -44,6 +44,8 @@ export const styles = StyleSheet.create({
     color: '#fff',
   },
   timerItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     backgroundColor: '#fff',
     padding: 15,
     borderRadius: 8,
@@ -61,10 +63,10 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 10,
+    marginTop: 4,
   },
   iconButton: {
-    backgroundColor: '#a2836e',
+    backgroundColor: '#b2947b',
     padding: 10,
     borderRadius: 8,
     marginHorizontal: 5,
@@ -98,7 +100,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#a2836e', // soft brown color
+    backgroundColor: '#b2947b', // soft brown color
     padding: 10,
     borderRadius: 8,
     marginRight: 10,
