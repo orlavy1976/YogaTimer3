@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "YogaTimer3",
-    "slug": "YogaTimer3",
+    "name": "YogaTimer",
+    "slug": "YogaTimer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,10 +18,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.orlavy.YogaTimer"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "081972d8-42ba-47fa-ba23-5c5b0480647d"
+      }
     }
   }
 }
