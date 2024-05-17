@@ -11,8 +11,8 @@ export default function StackNavigator() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerTintColor: '#6a4c93', // Set the title color here
-          headerStyle: { backgroundColor: '#dddddd' }, // Optionally, set the background color of the header
+          headerTintColor: '#6a4c93',
+          headerStyle: { backgroundColor: '#dddddd' },
         }}>
         <Stack.Screen name="ExerciseList" component={ExerciseList} options={{ title: 'Yoga Timer' }} />
         <Stack.Screen name="ExerciseDetails" component={ExerciseDetails} options={{ title: 'Exercise Details' }} />

@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   header: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#6a4c93',
+    color: '6a4c93',
     marginBottom: 20,
     textAlign: 'center',
   },
@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     right: 20,
     bottom: 80,
-    backgroundColor: '#5ba4a4',
+    backgroundColor: '#6a4c93',
     borderRadius: 30, // making it round
     width: 60, // equal width and height to make it circular
     height: 60, // equal width and height to make it circular
