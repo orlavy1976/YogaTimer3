@@ -14,7 +14,6 @@ const ExerciseList = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Yoga Timer</Text>
       <FlatList
         data={exercises}
         keyExtractor={(item) => item.id}
