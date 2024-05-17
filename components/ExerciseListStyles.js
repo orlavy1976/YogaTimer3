@@ -14,13 +14,20 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   addButton: {
-    flexDirection: 'row',
+    position: 'absolute',
+    right: 20,
+    bottom: 80,
+    backgroundColor: '#5ba4a4',
+    borderRadius: 30, // making it round
+    width: 60, // equal width and height to make it circular
+    height: 60, // equal width and height to make it circular
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#6a4c93',
-    padding: 10,
-    borderRadius: 8,
-    marginBottom: 20,
+    elevation: 5, // shadow for android
+    shadowColor: '#000', // shadow for iOS
+    shadowOffset: { width: 0, height: 2 }, // shadow for iOS
+    shadowOpacity: 0.2, // shadow for iOS
+    shadowRadius: 8, // shadow for iOS
   },
   addButtonText: {
     color: '#fff',
@@ -29,6 +36,9 @@ export const styles = StyleSheet.create({
     marginLeft: 5,
   },
   exerciseItem: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-between',
     backgroundColor: '#fff',
     padding: 15,
     borderRadius: 8,
@@ -51,7 +61,7 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 10,
+    marginTop: 6,
   },
   iconButton: {
     backgroundColor: '#a2836e',
