@@ -82,7 +82,7 @@ const ExerciseDetails = ({ route, navigation }) => {
         console.log(`Starting loop ${i + 1} for timer:`, timer);
 
         if (timer.soundAtStart) {
-          //await playSound(require('../assets/start_sound.mp3'));
+          await playSound(require('../assets/bell.wav'));
         }
 
         await new Promise((resolve) => {
@@ -102,7 +102,7 @@ const ExerciseDetails = ({ route, navigation }) => {
             console.log('Timer completed');
             clearInterval(intervalRef.current);
             if (timer.soundAtEnd) {
-              //await playSound(require('../assets/end_sound.mp3'));
+              await playSound(require('../assets/bell.wav'));
             }
             resolve();
           }, timer.duration * 1000);
