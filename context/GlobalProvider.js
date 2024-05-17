@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useReducer } from 'react';
 
 const initialState = {
   exercises: [
-    { id: '1', name: 'Long Flow', timers: [{ id: '1', duration: 30, loop: 30 }] },
+    { id: '1', name: 'Long Flow', timers: [{ id: '1', duration: 30, loop: 30, soundAtStart: true }] },
   ],
 };
 
