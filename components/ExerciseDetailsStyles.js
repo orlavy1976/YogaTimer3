@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  // existing styles
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
@@ -13,20 +14,34 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   },
+  input: {
+    height: 40,
+    borderColor: '#6a4c93',
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 20,
+    backgroundColor: '#fff',
+  },
   addButton: {
-    flexDirection: 'row',
+    position: 'absolute',
+    right: 20,
+    bottom: 80,
+    backgroundColor: '#5ba4a4',
+    borderRadius: 30, // making it round
+    width: 60, // equal width and height to make it circular
+    height: 60, // equal width and height to make it circular
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#6a4c93',
-    padding: 10,
-    borderRadius: 8,
-    marginBottom: 20,
+    elevation: 5, // shadow for android
+    shadowColor: '#000', // shadow for iOS
+    shadowOffset: { width: 0, height: 2 }, // shadow for iOS
+    shadowOpacity: 0.2, // shadow for iOS
+    shadowRadius: 8, // shadow for iOS
   },
-  addButtonText: {
+  addButtonIcon: {
+    fontSize: 30,
     color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginLeft: 5,
   },
   timerItem: {
     backgroundColor: '#fff',
@@ -58,9 +73,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#4caf50',
+    backgroundColor: '#5ba4a4',
     padding: 10,
     borderRadius: 8,
+    marginBottom: 20,
   },
   stopButton: {
     flexDirection: 'row',
@@ -78,5 +94,27 @@ export const styles = StyleSheet.create({
   disabled: {
     opacity: 0.5,
   },
-
+  saveButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#a2836e', // soft brown color
+    padding: 10,
+    borderRadius: 8,
+    marginRight: 10,
+  },
+  cancelButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#6a4c93', // purple color
+    padding: 10,
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginLeft: 5,
+  },
 });

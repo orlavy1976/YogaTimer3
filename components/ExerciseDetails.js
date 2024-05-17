@@ -26,7 +26,6 @@ const ExerciseDetails = ({ route, navigation }) => {
     }
   }, [state.exercises, exerciseId]);
 
-
   useEffect(() => {
     if (running) {
       console.log('Timer started');
@@ -126,21 +125,30 @@ const ExerciseDetails = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{exercise.name}</Text>
+      <TouchableOpacity style={styles.runButton} onPress={running ? stopExercise : startExercise} disabled={!timers.length}>
+        {!running ?
+          <>
+            <Icon name="play-outline" size={24} color="#fff" />
+            <Text style={styles.buttonText}>Run</Text>
+          </> :
+          <>
+            <Icon name="stop-outline" size={24} color="#fff" />
+            <Text style={styles.buttonText}>Stop</Text>
+          </>
+        }
+
+      </TouchableOpacity>
       <TextInput
         style={styles.input}
         value={name}
-        onChangeText={setName}
+        onChangeText={(text) => {
+          setName(text);
+          const updatedExercise = { ...exercise, name: text };
+          dispatch({ type: 'EDIT_EXERCISE', payload: updatedExercise });
+        }}
         placeholder="Exercise Name"
         editable={!running}
       />
-      <TouchableOpacity
-        style={styles.addButton}
-        onPress={() => !running && navigation.navigate('TimerDetails', { exerciseId: exerciseId || new Date().toISOString() })}
-        disabled={running}
-      >
-        <Icon name="add-circle-outline" size={24} color="#fff" />
-        <Text style={styles.addButtonText}>Add Timer</Text>
-      </TouchableOpacity>
       <FlatList
         data={timers}
         keyExtractor={(item) => item.id}
@@ -171,8 +179,16 @@ const ExerciseDetails = ({ route, navigation }) => {
           </View>
         )}
       />
+      <View style={styles.addButton}>
+        <TouchableOpacity
+          onPress={() => !running && navigation.navigate('TimerDetails', { exerciseId: exerciseId || new Date().toISOString() })}
+          disabled={running}
+        >
+          <Icon name="add" style={styles.addButtonIcon} />
+        </TouchableOpacity>
+      </View>
       <View style={styles.buttonContainer}>
-        {!running ? (
+        {!running && !exerciseId && (
           <>
             <TouchableOpacity style={styles.saveButton} onPress={saveExercise}>
               <Icon name="checkmark-outline" size={24} color="#fff" />
@@ -182,20 +198,10 @@ const ExerciseDetails = ({ route, navigation }) => {
               <Icon name="close-outline" size={24} color="#fff" />
               <Text style={styles.buttonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.runButton} onPress={startExercise}>
-              <Icon name="play-outline" size={24} color="#fff" />
-              <Text style={styles.buttonText}>Run</Text>
-            </TouchableOpacity>
-          </>
-        ) : (
-          <>
-            <TouchableOpacity style={styles.stopButton} onPress={stopExercise}>
-              <Icon name="stop-outline" size={24} color="#fff" />
-              <Text style={styles.buttonText}>Stop</Text>
-            </TouchableOpacity>
           </>
         )}
       </View>
+
     </View>
   );
 };
