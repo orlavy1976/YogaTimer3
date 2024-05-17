@@ -3,8 +3,7 @@ import React, { createContext, useEffect, useReducer } from 'react';
 
 const initialState = {
   exercises: [
-    { id: '1', name: 'Sun Salutation', timers: [{ id: '1', duration: 30, loop: 3 }] },
-    { id: '2', name: 'Breathing Exercise', timers: [{ id: '2', duration: 45, loop: 1 }] },
+    { id: '1', name: 'Long Flow', timers: [{ id: '1', duration: 30, loop: 30 }] },
   ],
 };
 
