@@ -18,4 +18,9 @@ const levenshtein = (a, b) => {
   return matrix[a.length][b.length];
 };
 
+export const getLevenshteinSimilarity = (str1, str2) => {
+  const distance = levenshtein(str1.toLowerCase(), str2.toLowerCase());
+  return 1 - distance / Math.max(str1.length, str2.length);
+};
+
 export default levenshtein;

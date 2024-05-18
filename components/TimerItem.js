@@ -4,7 +4,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from './ExerciseDetailsStyles';
 
-const TimerItem = ({ item, remainingTime, currentLoop, running, timerRef, exerciseId, navigation, setTimers, dispatch, drag }) => {
+const TimerItem = ({ item, timers, remainingTime, currentLoop, running, timerRef, exerciseId, navigation, setTimers, dispatch, drag }) => {
   return (
     <TouchableOpacity
       onLongPress={drag}

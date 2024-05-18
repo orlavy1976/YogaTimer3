@@ -47,6 +47,7 @@ const ExerciseDetails = ({ route, navigation }) => {
   const renderItem = ({ item, drag }) => (
     <TimerItem
       item={item}
+      timers={timers}
       remainingTime={remainingTime}
       currentLoop={currentLoop}
       running={running}
@@ -67,8 +68,8 @@ const ExerciseDetails = ({ route, navigation }) => {
         style={styles.background}>
         <View style={styles.innerContainer}>
           <Text style={styles.header}>{exercise.name}</Text>
-          <View style={{ display: timers.length ? 'block' : 'none' }}>
-            <TouchableOpacity style={styles.runButton} onPress={running ? stopExercise : startExercise}>
+          <View>
+            <TouchableOpacity style={[styles.runButton, !timers.length && styles.runButtonDisabled]} onPress={running ? stopExercise : startExercise}>
               {!running ?
                 <>
                   <Icon name="play-outline" size={24} color="#fff" />

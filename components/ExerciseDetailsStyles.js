@@ -87,6 +87,9 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 20,
   },
+  runButtonDisabled: {
+    backgroundColor: '#b0d6d6'
+  },
   stopButton: {
     flexDirection: 'row',
     alignItems: 'center',
