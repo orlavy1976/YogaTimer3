@@ -26,15 +26,15 @@ const ExerciseList = ({ navigation }) => {
             keyExtractor={(item) => item.id}
             renderItem={({ item, index }) => (
               <View style={styles.exerciseItem}>
-                <View style={styles.exerciseLeftSide}>
-                  <Image source={getBestMatchingIcon(item.name)} style={styles.customIcon} />
-                  <TouchableOpacity onPress={() => navigation.navigate('ExerciseDetails', { exerciseId: item.id })}>
+                <TouchableOpacity onPress={() => navigation.navigate('ExerciseDetails', { exerciseId: item.id })}>
+                  <View style={styles.exerciseLeftSide}>
+                    <Image source={getBestMatchingIcon(item.name)} style={styles.customIcon} />
                     <View>
                       <Text style={styles.exerciseName}>{item.name}</Text>
                       <Text style={styles.exerciseTimers}>Timers: {item.timers.length}</Text>
                     </View>
-                  </TouchableOpacity>
-                </View>
+                  </View>
+                </TouchableOpacity>
                 <View style={styles.buttonContainer}>
                   <TouchableOpacity style={styles.iconButton} onPress={() => removeExercise(item.id)}>
                     <Icon name="trash-outline" size={20} color="#fff" />

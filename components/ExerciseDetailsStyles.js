@@ -50,9 +50,8 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     color: '#fff',
   },
-  timerItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  timerItemContainer: {
+    flex: 1,
     backgroundColor: '#fff',
     padding: 15,
     borderRadius: 8,
@@ -62,6 +61,10 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 2,
+  },
+  timerItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   timerDetail: {
     fontSize: 16,
@@ -128,5 +131,11 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginLeft: 5,
+  },
+  progressBarContainer: {
+    width: '100%',
+  },
+  progressBar: {
+    marginTop: 10,
   },
 });
