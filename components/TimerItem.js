@@ -4,9 +4,13 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from './ExerciseDetailsStyles';
 
-const TimerItem = ({ item, timers, remainingTime, currentLoop, running, timerRef, exerciseId, navigation, setTimers, dispatch }) => {
+const TimerItem = ({ item, remainingTime, currentLoop, running, timerRef, exerciseId, navigation, setTimers, dispatch, drag }) => {
   return (
-    <View style={styles.timerItem}>
+    <TouchableOpacity
+      onLongPress={drag}
+      disabled={running}
+      style={styles.timerItem}
+    >
       <View>
         <Text style={styles.timerDetail}>
           Duration: {running && item.id === timerRef.current?.id ? `${remainingTime}/${item.duration}` : `${item.duration}s`}
@@ -35,7 +39,7 @@ const TimerItem = ({ item, timers, remainingTime, currentLoop, running, timerRef
           <Icon name="trash-outline" size={20} color="#fff" />
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -1,11 +1,12 @@
 // ExerciseDetails.js
 import React, { useContext, useEffect, useState } from 'react';
-import { FlatList, ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import DraggableFlatList from 'react-native-draggable-flatlist';
 import Icon from 'react-native-vector-icons/Ionicons';
+import TimerItem from '../components/TimerItem';
 import { GlobalContext } from '../context/GlobalProvider';
 import useExerciseTimer from '../hooks/useExerciseTimer';
 import { styles } from './ExerciseDetailsStyles';
-import TimerItem from './TimerItem';
 
 const ExerciseDetails = ({ route, navigation }) => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -43,6 +44,21 @@ const ExerciseDetails = ({ route, navigation }) => {
     setRunning(false);
   };
 
+  const renderItem = ({ item, drag }) => (
+    <TimerItem
+      item={item}
+      remainingTime={remainingTime}
+      currentLoop={currentLoop}
+      running={running}
+      timerRef={timerRef}
+      exerciseId={exerciseId}
+      navigation={navigation}
+      setTimers={setTimers}
+      dispatch={dispatch}
+      drag={drag}
+    />
+  );
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -76,23 +92,11 @@ const ExerciseDetails = ({ route, navigation }) => {
             placeholder="Exercise Name"
             editable={!running}
           />
-          <FlatList
+          <DraggableFlatList
             data={timers}
             keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <TimerItem
-                item={item}
-                timers={timers}
-                remainingTime={remainingTime}
-                currentLoop={currentLoop}
-                running={running}
-                timerRef={timerRef}
-                exerciseId={exerciseId}
-                navigation={navigation}
-                setTimers={setTimers}
-                dispatch={dispatch}
-              />
-            )}
+            renderItem={renderItem}
+            onDragEnd={({ data }) => setTimers(data)}
           />
           <View style={styles.buttonContainer}>
             {!running && !exerciseId && (
