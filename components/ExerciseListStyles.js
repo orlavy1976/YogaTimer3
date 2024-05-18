@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     backgroundColor: '#fff',
-    padding: 15,
+    padding: 12,
     borderRadius: 8,
     marginBottom: 10,
     shadowColor: '#000',
