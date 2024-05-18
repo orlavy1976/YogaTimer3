@@ -1,5 +1,5 @@
 // ExerciseDetails.js
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import DraggableFlatList from 'react-native-draggable-flatlist';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -15,7 +15,7 @@ const ExerciseDetails = ({ route, navigation }) => {
   const [name, setName] = useState(exercise.name);
   const [timers, setTimers] = useState(exercise.timers);
   const [running, setRunning] = useState(false);
-
+  const previousTimersRef = useRef(timers);
   const { remainingTime, currentLoop, timerRef } = useExerciseTimer(timers, running, setRunning);
 
   useEffect(() => {
@@ -24,6 +24,14 @@ const ExerciseDetails = ({ route, navigation }) => {
       setTimers(updatedExercise.timers);
     }
   }, [state.exercises, exerciseId]);
+
+  useEffect(() => {
+    if (JSON.stringify(previousTimersRef.current) !== JSON.stringify(timers)) {
+      const newTimers = timers.map((timer, index) => ({ ...timer, order: index }));
+      dispatch({ type: 'EDIT_EXERCISE', payload: { ...exercise, timers: newTimers } });
+      previousTimersRef.current = timers;
+    }
+  }, [timers, exercise]);
 
   const saveExercise = () => {
     const newExercise = { id: exerciseId || new Date().toISOString(), name, timers };
