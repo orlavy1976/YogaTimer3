@@ -1,10 +1,17 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-  // existing styles
+  background: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  backgroundImageOpacity: {
+    opacity: 0.2, // Adjust the opacity as needed
+  },
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
+  },
+  innerContainer: {
     padding: 20,
   },
   header: {

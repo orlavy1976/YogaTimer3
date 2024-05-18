@@ -1,9 +1,16 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  background: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  backgroundImageOpacity: {
+    opacity: 0.2, // Adjust the opacity as needed
+  },
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+  },
+  innerContainer: {
     padding: 20,
   },
   header: {
@@ -12,6 +19,11 @@ export const styles = StyleSheet.create({
     color: '#6a4c93',
     marginBottom: 20,
     textAlign: 'center',
+  },
+  customIcon: {
+    width: 48,
+    height: 48,
+    marginRight: 8,
   },
   addButton: {
     position: 'absolute',
@@ -48,6 +60,9 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 2,
+  },
+  exerciseLeftSide: {
+    flexDirection: 'row',
   },
   exerciseName: {
     fontSize: 18,

@@ -1,9 +1,11 @@
 import { Audio } from 'expo-av';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { FlatList, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { GlobalContext } from '../context/GlobalProvider';
 import { styles } from './ExerciseDetailsStyles';
+
+const backgroundImage = require('../assets/background.jpg');
 
 const ExerciseDetails = ({ route, navigation }) => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -123,65 +125,87 @@ const ExerciseDetails = ({ route, navigation }) => {
   };
 
   return (
+
     <View style={styles.container}>
-      <Text style={styles.header}>{exercise.name}</Text>
-      <View style={{ display: timers.length ? 'block' : 'none' }}>
-        <TouchableOpacity style={styles.runButton} onPress={running ? stopExercise : startExercise}>
-          {!running ?
-            <>
-              <Icon name="play-outline" size={24} color="#fff" />
-              <Text style={styles.buttonText}>Start</Text>
-            </> :
-            <>
-              <Icon name="stop-outline" size={24} color="#fff" />
-              <Text style={styles.buttonText}>Stop</Text>
-            </>
-          }
-        </TouchableOpacity>
-      </View>
-      <TextInput
-        style={styles.input}
-        value={name}
-        onChangeText={(text) => {
-          setName(text);
-          const updatedExercise = { ...exercise, name: text };
-          dispatch({ type: 'EDIT_EXERCISE', payload: updatedExercise });
-        }}
-        placeholder="Exercise Name"
-        editable={!running}
-      />
-      <FlatList
-        data={timers}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.timerItem}>
-            <View>
-              <Text style={styles.timerDetail}>Duration: {running && item.id == timerRef.current?.id ? `${remainingTime}/${item.duration}` : item.duration}s</Text>
-              <Text style={styles.timerDetail}>Loop: {running && item.id == timerRef.current?.id ? `${currentLoop}/${item.loop}` : `${item.loop} times`}</Text>
-            </View>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={styles.iconButton}
-                onPress={() => navigation.navigate('TimerDetails', { exerciseId, timerId: item.id })}
-                disabled={running}
-              >
-                <Icon name="pencil-outline" size={20} color="#fff" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.iconButton}
-                onPress={() => {
-                  const newTimers = timers.filter((timer) => timer.id !== item.id);
-                  setTimers(newTimers);
-                  dispatch({ type: 'REMOVE_TIMER', payload: { exerciseId, timerId: item.id } });
-                }}
-                disabled={running}
-              >
-                <Icon name="trash-outline" size={20} color="#fff" />
-              </TouchableOpacity>
-            </View>
+      <ImageBackground
+        source={require('../assets/background.jpg')}
+        imageStyle={styles.backgroundImageOpacity}
+        style={styles.background}>
+        <View style={styles.innerContainer}>
+          <Text style={styles.header}>{exercise.name}</Text>
+          <View style={{ display: timers.length ? 'block' : 'none' }}>
+            <TouchableOpacity style={styles.runButton} onPress={running ? stopExercise : startExercise}>
+              {!running ?
+                <>
+                  <Icon name="play-outline" size={24} color="#fff" />
+                  <Text style={styles.buttonText}>Start</Text>
+                </> :
+                <>
+                  <Icon name="stop-outline" size={24} color="#fff" />
+                  <Text style={styles.buttonText}>Stop</Text>
+                </>
+              }
+            </TouchableOpacity>
           </View>
-        )}
-      />
+          <TextInput
+            style={styles.input}
+            value={name}
+            onChangeText={(text) => {
+              setName(text);
+              const updatedExercise = { ...exercise, name: text };
+              dispatch({ type: 'EDIT_EXERCISE', payload: updatedExercise });
+            }}
+            placeholder="Exercise Name"
+            editable={!running}
+          />
+          <FlatList
+            data={timers}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <View style={styles.timerItem}>
+                <View>
+                  <Text style={styles.timerDetail}>Duration: {running && item.id == timerRef.current?.id ? `${remainingTime}/${item.duration}` : item.duration}s</Text>
+                  <Text style={styles.timerDetail}>Loop: {running && item.id == timerRef.current?.id ? `${currentLoop}/${item.loop}` : `${item.loop} times`}</Text>
+                </View>
+                <View style={styles.buttonContainer}>
+                  <TouchableOpacity
+                    style={styles.iconButton}
+                    onPress={() => navigation.navigate('TimerDetails', { exerciseId, timerId: item.id })}
+                    disabled={running}
+                  >
+                    <Icon name="pencil-outline" size={20} color="#fff" />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.iconButton}
+                    onPress={() => {
+                      const newTimers = timers.filter((timer) => timer.id !== item.id);
+                      setTimers(newTimers);
+                      dispatch({ type: 'REMOVE_TIMER', payload: { exerciseId, timerId: item.id } });
+                    }}
+                    disabled={running}
+                  >
+                    <Icon name="trash-outline" size={20} color="#fff" />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
+          />
+          <View style={styles.buttonContainer}>
+            {!running && !exerciseId && (
+              <>
+                <TouchableOpacity style={styles.saveButton} onPress={saveExercise}>
+                  <Icon name="checkmark-outline" size={24} color="#fff" />
+                  <Text style={styles.buttonText}>Save</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.cancelButton} onPress={() => navigation.goBack()}>
+                  <Icon name="close-outline" size={24} color="#fff" />
+                  <Text style={styles.buttonText}>Cancel</Text>
+                </TouchableOpacity>
+              </>
+            )}
+          </View>
+        </View>
+      </ImageBackground>
       <View style={styles.addButton}>
         <TouchableOpacity
           onPress={() => !running && navigation.navigate('TimerDetails', { exerciseId: exerciseId || new Date().toISOString() })}
@@ -190,22 +214,7 @@ const ExerciseDetails = ({ route, navigation }) => {
           <Icon name="add" style={styles.addButtonIcon} />
         </TouchableOpacity>
       </View>
-      <View style={styles.buttonContainer}>
-        {!running && !exerciseId && (
-          <>
-            <TouchableOpacity style={styles.saveButton} onPress={saveExercise}>
-              <Icon name="checkmark-outline" size={24} color="#fff" />
-              <Text style={styles.buttonText}>Save</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.cancelButton} onPress={() => navigation.goBack()}>
-              <Icon name="close-outline" size={24} color="#fff" />
-              <Text style={styles.buttonText}>Cancel</Text>
-            </TouchableOpacity>
-          </>
-        )}
-      </View>
-
-    </View>
+    </View >
   );
 };
 
