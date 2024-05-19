@@ -1,9 +1,11 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import * as Progress from 'react-native-progress';
-import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '../styles/colors';
+import CustomIcon from './CustomIcon';
 import { styles } from './ExerciseDetailsStyles';
+import IconButton from './IconButton';
+import Label from './Label';
 
 const TimerItem = ({ item, timers, remainingTime, currentLoop, running, timerRef, exerciseId, navigation, setTimers, dispatch, drag }) => {
   const progress = item.id === timerRef.current?.id
@@ -16,34 +18,28 @@ const TimerItem = ({ item, timers, remainingTime, currentLoop, running, timerRef
       style={styles.timerItemContainer}
     >
       <View style={styles.timerItem}>
-        <View>
-          <Text style={styles.timerDetail}>
-            Duration: {running && item.id === timerRef.current?.id ? `${remainingTime}/${item.duration}` : `${item.duration}s`}
-          </Text>
-          <Text style={styles.timerDetail}>
-            Loop: {running && item.id === timerRef.current?.id ? `${currentLoop}/${item.loop}` : `${item.loop} times`}
-          </Text>
-
+        <View style={styles.timerLeftSide}>
+          <CustomIcon source={require('../assets/icons/timer.jpg')} />
+          <View>
+            <Label text={`Duration: ${running && item.id === timerRef.current?.id ? `${remainingTime}/${item.duration}` : `${item.duration}s`}`} />
+            <Label text={`Loop: ${running && item.id === timerRef.current?.id ? `${currentLoop}/${item.loop}` : `${item.loop} times`}`} />
+          </View>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.iconButton}
+          <IconButton
             onPress={() => navigation.navigate('TimerDetails', { exerciseId, timerId: item.id })}
+            name='pencil-outline'
             disabled={running}
-          >
-            <Icon name="pencil-outline" size={20} color={colors.iconColor} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.iconButton}
+          />
+          <IconButton
             onPress={() => {
               const newTimers = timers.filter((timer) => timer.id !== item.id);
               setTimers(newTimers);
               dispatch({ type: 'REMOVE_TIMER', payload: { exerciseId, timerId: item.id } });
             }}
+            name='trash-outline'
             disabled={running}
-          >
-            <Icon name="trash-outline" size={20} color={colors.iconColor} />
-          </TouchableOpacity>
+          />
         </View>
       </View>
       {running && item.id === timerRef.current?.id && <View style={styles.progressBarContainer}>

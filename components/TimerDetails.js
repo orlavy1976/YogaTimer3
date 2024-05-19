@@ -1,7 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { Switch, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { Switch, Text, View } from 'react-native';
 import { GlobalContext } from '../context/GlobalProvider';
+import colors from '../styles/colors';
+import Button from './Button';
+import Label from './Label';
+import StepperInput from './StepperInput';
 import { styles } from './TimerDetailsStyles';
 
 const TimerDetails = ({ route, navigation }) => {
@@ -28,38 +31,19 @@ const TimerDetails = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Timer Details</Text>
-      <Text style={styles.label}>Duration (seconds)</Text>
-      <TextInput
-        style={styles.input}
-        value={duration.toString()}
-        onChangeText={(text) => setDuration(Number(text))}
-        keyboardType="numeric"
-      />
-      <Text style={styles.label}>Loop Count</Text>
-      <TextInput
-        style={styles.input}
-        value={loopCount.toString()}
-        onChangeText={(text) => setLoopCount(Number(text))}
-        keyboardType="numeric"
-      />
-      <Text style={styles.label}>Sound Options</Text>
+      <StepperInput label='Duration (seconds)' value={duration} onChange={(text) => setDuration(Number(text))} />
+      <StepperInput label='Loop Count' value={loopCount} onChange={(text) => setLoopCount(Number(text))} />
       <View style={styles.switchContainer}>
-        <Text style={styles.switchLabel}>Sound at Start</Text>
+        <Label text='Sound at Start' />
         <Switch value={soundAtStart} onValueChange={setSoundAtStart} />
       </View>
       <View style={styles.switchContainer}>
-        <Text style={styles.switchLabel}>Sound at End</Text>
+        <Label text='Sound at End' />
         <Switch value={soundAtEnd} onValueChange={setSoundAtEnd} />
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.saveButton} onPress={saveTimer}>
-          <Icon name="checkmark-outline" size={24} color="#fff" />
-          <Text style={styles.buttonText}>Save</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.cancelButton} onPress={() => navigation.goBack()}>
-          <Icon name="close-outline" size={24} color="#fff" />
-          <Text style={styles.buttonText}>Cancel</Text>
-        </TouchableOpacity>
+        <Button text='Save' onPress={saveTimer} iconName="checkmark-outline" backgroundColor={colors.primary} />
+        <Button text='Cancel' onPress={() => navigation.goBack()} iconName="close-outline" backgroundColor={colors.secondary} />
       </View>
     </View>
   );

@@ -71,15 +71,13 @@ const useExerciseTimer = (timers, running, setRunning, repeatCount) => {
 
           if (!running) return;
 
-          setCurrentLoop((prev) => {
-            console.log("set current loop", prev);
-            return prev + 1;
-          });
+          setCurrentLoop((prev) => prev + 1);
         }
+        setCurrentLoop(1);
       }
     }
     setRunning(false);
-    setCurrentLoop(1);
+    setCurrentRepeat(1);
     timerRef.current = null;
   };
 

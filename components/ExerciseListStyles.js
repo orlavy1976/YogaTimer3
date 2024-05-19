@@ -22,33 +22,6 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   },
-  customIcon: {
-    width: 48,
-    height: 48,
-    marginRight: 8,
-  },
-  addButton: {
-    position: 'absolute',
-    right: 20,
-    bottom: 80,
-    backgroundColor: colors.primary,
-    borderRadius: 35, // making it round
-    width: 70, // equal width and height to make it circular
-    height: 70, // equal width and height to make it circular
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 5, // shadow for android
-    shadowColor: '#000', // shadow for iOS
-    shadowOffset: { width: 0, height: 2 }, // shadow for iOS
-    shadowOpacity: 0.2, // shadow for iOS
-    shadowRadius: 8, // shadow for iOS
-  },
-  addButtonText: {
-    color: colors.iconColor,
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginLeft: 5,
-  },
   exerciseItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -75,17 +48,6 @@ export const styles = StyleSheet.create({
   exerciseTimers: {
     fontSize: 14,
     color: colors.textPrimary,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginLeft: 'auto',
-  },
-  iconButton: {
-    backgroundColor: colors.secondary,
-    padding: 10,
-    borderRadius: 8,
-    marginHorizontal: 5,
   },
   dragging: {
     opacity: 0.3,

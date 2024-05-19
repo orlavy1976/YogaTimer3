@@ -24,32 +24,14 @@ export const styles = StyleSheet.create({
   },
   input: {
     height: 40,
+    width: '50%',
     borderColor: colors.primary,
     borderWidth: 1,
     borderRadius: 8,
     padding: 10,
     marginBottom: 20,
     backgroundColor: '#fff',
-  },
-  addButton: {
-    position: 'absolute',
-    right: 20,
-    bottom: 80,
-    backgroundColor: colors.primary,
-    borderRadius: 35, // making it round
-    width: 70, // equal width and height to make it circular
-    height: 70, // equal width and height to make it circular
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 5, // shadow for android
-    shadowColor: '#000', // shadow for iOS
-    shadowOffset: { width: 0, height: 2 }, // shadow for iOS
-    shadowOpacity: 0.2, // shadow for iOS
-    shadowRadius: 8, // shadow for iOS
-  },
-  addButtonIcon: {
-    fontSize: 30,
-    color: colors.iconColor,
+    fontSize: 16,
   },
   timerItemContainer: {
     flex: 1,
@@ -67,20 +49,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  timerDetail: {
-    fontSize: 16,
-    color: colors.textPrimary,
-  },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 4,
-  },
-  iconButton: {
-    backgroundColor: colors.secondary,
-    padding: 10,
-    borderRadius: 8,
-    marginHorizontal: 5,
   },
   runButton: {
     flexDirection: 'row',
@@ -97,23 +69,6 @@ export const styles = StyleSheet.create({
   disabled: {
     opacity: 0.5,
   },
-  saveButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.secondary,
-    padding: 10,
-    borderRadius: 8,
-    marginRight: 10,
-  },
-  cancelButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.primary,
-    padding: 10,
-    borderRadius: 8,
-  },
   buttonText: {
     color: '#fff',
     fontSize: 18,
@@ -129,5 +84,13 @@ export const styles = StyleSheet.create({
   },
   stepperContainer: {
     marginBottom: 10,
+  },
+  inputsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  timerLeftSide: {
+    flexDirection: 'row',
+    alignItems: 'left',
   },
 });

@@ -6,6 +6,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import TimerItem from '../components/TimerItem';
 import { GlobalContext } from '../context/GlobalProvider';
 import useExerciseTimer from '../hooks/useExerciseTimer';
+import colors from '../styles/colors';
+import AddButton from './AddButton';
+import Button from './Button';
 import { styles } from './ExerciseDetailsStyles';
 import StepperInput from './StepperInput';
 
@@ -19,7 +22,7 @@ const ExerciseDetails = ({ route, navigation }) => {
   const [repeatCount, setRepeatCount] = useState(exercise.repeatCount || 1);
   const [running, setRunning] = useState(false);
   const previousTimersRef = useRef(timers);
-  const { remainingTime, currentLoop, timerRef } = useExerciseTimer(timers, running, setRunning, repeatCount);
+  const { remainingTime, currentLoop, currentRepeat, timerRef } = useExerciseTimer(timers, running, setRunning, repeatCount);
 
   useEffect(() => {
     const updatedExercise = state.exercises.find((ex) => ex.id === exerciseId);
@@ -89,24 +92,26 @@ const ExerciseDetails = ({ route, navigation }) => {
                 </> :
                 <>
                   <Icon name="stop-outline" size={24} color="#fff" />
-                  <Text style={styles.buttonText}>{`Stop ${currentLoop} / ${repeatCount}`}</Text>
+                  <Text style={styles.buttonText}>{`Stop ${currentRepeat} / ${repeatCount}`}</Text>
                 </>
               }
             </TouchableOpacity>
           </View>
-          <TextInput
-            style={styles.input}
-            value={name}
-            onChangeText={(text) => {
-              setName(text);
-              const updatedExercise = { ...exercise, name: text };
-              dispatch({ type: 'EDIT_EXERCISE', payload: updatedExercise });
-            }}
-            placeholder="Exercise Name"
-            editable={!running}
-          />
-          <View style={styles.stepperContainer}>
-            <StepperInput value={repeatCount} onChange={setRepeatCount} disabled={running} />
+          <View style={styles.inputsContainer}>
+            <TextInput
+              style={styles.input}
+              value={name}
+              onChangeText={(text) => {
+                setName(text);
+                const updatedExercise = { ...exercise, name: text };
+                dispatch({ type: 'EDIT_EXERCISE', payload: updatedExercise });
+              }}
+              placeholder="Exercise Name"
+              editable={!running}
+            />
+            <View style={styles.stepperContainer}>
+              <StepperInput value={repeatCount} onChange={setRepeatCount} disabled={running} />
+            </View>
           </View>
           <DraggableFlatList
             data={timers}
@@ -117,28 +122,20 @@ const ExerciseDetails = ({ route, navigation }) => {
           <View style={styles.buttonContainer}>
             {!running && !exerciseId && (
               <>
-                <TouchableOpacity style={styles.saveButton} onPress={saveExercise}>
-                  <Icon name="checkmark-outline" size={24} color="#fff" />
-                  <Text style={styles.buttonText}>Save</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.cancelButton} onPress={() => navigation.goBack()}>
-                  <Icon name="close-outline" size={24} color="#fff" />
-                  <Text style={styles.buttonText}>Cancel</Text>
-                </TouchableOpacity>
+                <Button text="Save" iconName="checkmark-outline" onPress={saveExercise} backgroundColor={colors.primary} disabled={name.length === 0} />
+                <Button text="Cancel" iconName="close-outline" onPress={() => navigation.goBack()} backgroundColor={colors.secondary} />
               </>
             )}
           </View>
         </View>
       </ImageBackground>
-      {!running && exerciseId && (
-        <View style={styles.addButton}>
-          <TouchableOpacity
-            onPress={() => !running && navigation.navigate('TimerDetails', { exerciseId: exerciseId || new Date().toISOString() })}
-            disabled={running}
-          >
-            <Icon name="add" style={styles.addButtonIcon} />
-          </TouchableOpacity>
-        </View>)}
+      {!running && exerciseId &&
+        (<AddButton
+          navigation={navigation}
+          destination={'TimerDetails'}
+          exerciseId={exerciseId}
+          params={{ exerciseId: exerciseId || new Date().toISOString() }}
+        />)}
     </View>
   );
 };

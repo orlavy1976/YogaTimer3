@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
-import { Image, ImageBackground, Text, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, Text, TouchableOpacity, View } from 'react-native';
 import DraggableFlatList from 'react-native-draggable-flatlist';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { GlobalContext } from '../context/GlobalProvider';
 import getBestMatchingIcon from '../utils/getBestMatchingIcon';
+import AddButton from './AddButton';
+import CustomIcon from './CustomIcon';
 import { styles } from './ExerciseListStyles';
+import IconButton from './IconButton';
+import Label from './Label';
 
 const ExerciseList = ({ navigation }) => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -25,17 +28,13 @@ const ExerciseList = ({ navigation }) => {
       onPress={() => navigation.navigate('ExerciseDetails', { exerciseId: item.id })}
       style={[styles.exerciseItem, isActive && styles.dragging]}>
       <View style={styles.exerciseLeftSide}>
-        <Image source={getBestMatchingIcon(item.name)} style={styles.customIcon} />
+        <CustomIcon source={getBestMatchingIcon(item.name)} />
         <View>
           <Text style={styles.exerciseName}>{item.name}</Text>
-          <Text style={styles.exerciseTimers}>Timers: {item.timers.length}</Text>
+          <Label text={`Timers: ${item.timers.length}`} />
         </View>
       </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.iconButton} onPress={() => removeExercise(item.id)}>
-          <Icon name="trash-outline" size={20} color="#fff" />
-        </TouchableOpacity>
-      </View>
+      <IconButton onPress={() => removeExercise(item.id)} name='trash-outline' />
     </TouchableOpacity>
   );
 
@@ -54,11 +53,7 @@ const ExerciseList = ({ navigation }) => {
           />
         </View>
       </ImageBackground>
-      <View style={styles.addButton}>
-        <TouchableOpacity onPress={() => navigation.navigate('ExerciseDetails')}>
-          <Icon name="add" size={24} color="#fff" />
-        </TouchableOpacity>
-      </View>
+      <AddButton navigation={navigation} destination={'ExerciseDetails'} />
     </View>
   );
 };
