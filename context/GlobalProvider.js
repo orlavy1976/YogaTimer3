@@ -10,7 +10,6 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'ADD_EXERCISE':
-      console.log('Adding exercise:', action.payload);
       return { ...state, exercises: [...state.exercises, action.payload] };
     case 'EDIT_EXERCISE':
       return {

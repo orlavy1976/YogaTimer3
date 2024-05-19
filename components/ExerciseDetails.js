@@ -7,6 +7,7 @@ import TimerItem from '../components/TimerItem';
 import { GlobalContext } from '../context/GlobalProvider';
 import useExerciseTimer from '../hooks/useExerciseTimer';
 import { styles } from './ExerciseDetailsStyles';
+import StepperInput from './StepperInput';
 
 const ExerciseDetails = ({ route, navigation }) => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -15,9 +16,10 @@ const ExerciseDetails = ({ route, navigation }) => {
   const exercise = state.exercises.find((ex) => ex.id === exerciseId) || { name: '', timers: [] };
   const [name, setName] = useState(exercise.name);
   const [timers, setTimers] = useState(exercise.timers);
+  const [repeatCount, setRepeatCount] = useState(exercise.repeatCount || 1);
   const [running, setRunning] = useState(false);
   const previousTimersRef = useRef(timers);
-  const { remainingTime, currentLoop, timerRef } = useExerciseTimer(timers, running, setRunning);
+  const { remainingTime, currentLoop, timerRef } = useExerciseTimer(timers, running, setRunning, repeatCount);
 
   useEffect(() => {
     const updatedExercise = state.exercises.find((ex) => ex.id === exerciseId);
@@ -35,7 +37,7 @@ const ExerciseDetails = ({ route, navigation }) => {
   }, [timers, exercise]);
 
   const saveExercise = () => {
-    const newExercise = { id: exerciseId || Date.now(), name, timers };
+    const newExercise = { id: exerciseId || Date.now(), name, timers, repeatCount };
     if (exerciseId) {
       dispatch({ type: 'EDIT_EXERCISE', payload: newExercise });
     } else {
@@ -87,7 +89,7 @@ const ExerciseDetails = ({ route, navigation }) => {
                 </> :
                 <>
                   <Icon name="stop-outline" size={24} color="#fff" />
-                  <Text style={styles.buttonText}>Stop</Text>
+                  <Text style={styles.buttonText}>{`Stop ${currentLoop} / ${repeatCount}`}</Text>
                 </>
               }
             </TouchableOpacity>
@@ -103,6 +105,9 @@ const ExerciseDetails = ({ route, navigation }) => {
             placeholder="Exercise Name"
             editable={!running}
           />
+          <View style={styles.stepperContainer}>
+            <StepperInput value={repeatCount} onChange={setRepeatCount} disabled={running} />
+          </View>
           <DraggableFlatList
             data={timers}
             keyExtractor={(item) => item.id}

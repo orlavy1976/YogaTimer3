@@ -127,4 +127,7 @@ export const styles = StyleSheet.create({
   progressBar: {
     marginTop: 10,
   },
+  stepperContainer: {
+    marginBottom: 10,
+  },
 });
