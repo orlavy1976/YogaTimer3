@@ -18,7 +18,6 @@ const TimerComponent = () => {
 
   useEffect(() => {
     if (running) {
-      console.log('Timer started');
       setCurrentLoop(1);
       setRemainingTime(10);
       runLoop();
@@ -39,18 +38,14 @@ const TimerComponent = () => {
 
   const runLoop = async () => {
     for (let i = currentLoop; i <= totalLoops; i++) {
-      console.log(`Starting loop ${i}`, { remainingTime, running });
       if (!running) {
-        console.log("not running");
         break;
       }
       setCurrentLoop(i);
       await new Promise((resolve) => {
-        console.log("promise started", { running, remainingTime })
         setRemainingTime(10);
         intervalRef.current = setInterval(() => {
           setRemainingTime((prev) => {
-            console.log('Remaining time:', prev);
             if (prev <= 1) {
               clearInterval(intervalRef.current);
               resolve();
@@ -61,33 +56,27 @@ const TimerComponent = () => {
         }, 1000);
 
         timeoutRef.current = setTimeout(() => {
-          console.log('timer timeout');
           clearInterval(intervalRef.current);
           resolve();
         }, 10000);
       });
 
       if (!running) {
-        console.log('Timer stopped');
         break;
       }
 
       if (i < totalLoops) {
         setCurrentLoop((prev) => prev + 1);
       } else {
-        console.log('Timer completed');
         setRunning(false);
       }
     }
   };
 
   const stopTimer = () => {
-    console.log('stopping Timer', { remainingTime, running });
-
     setRunning(false);
     clearTimeout(timeoutRef.current);
     clearInterval(intervalRef.current);
-    console.log('Timer stopped', { running });
   };
 
   return (

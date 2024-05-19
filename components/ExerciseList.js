@@ -19,7 +19,6 @@ const ExerciseList = ({ navigation }) => {
   };
 
   const updateExercisesOrder = (data) => {
-    console.log('updateExercisesOrder', data);
     dispatch({ type: 'UPDATE_EXERCISES_ORDER', payload: data });
   };
 
