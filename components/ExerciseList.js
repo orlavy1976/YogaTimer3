@@ -23,12 +23,12 @@ const ExerciseList = ({ navigation }) => {
     dispatch({ type: 'UPDATE_EXERCISES_ORDER', payload: data });
   };
 
-  const renderItem = ({ item, drag, isActive }) => (
+  const renderItem = ({ item, drag }) => (
     <Card>
       <TouchableOpacity
         onLongPress={drag}
         onPress={() => navigation.navigate('ExerciseDetails', { exerciseId: item.id })}
-        style={[styles.exerciseItem, isActive && styles.dragging]}>
+        style={styles.exerciseItem}>
         <View style={styles.exerciseLeftSide}>
           <CustomIcon source={getBestMatchingIcon(item.name)} />
           <View>

@@ -1,8 +1,6 @@
-// ExerciseDetails.js
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { ImageBackground, Keyboard, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, Keyboard, TextInput, View } from 'react-native';
 import DraggableFlatList from 'react-native-draggable-flatlist';
-import Icon from 'react-native-vector-icons/Ionicons';
 import TimerItem from '../components/TimerItem';
 import { GlobalContext } from '../context/GlobalProvider';
 import useExerciseTimer from '../hooks/useExerciseTimer';
@@ -10,6 +8,7 @@ import colors from '../styles/colors';
 import AddButton from './AddButton';
 import Button from './Button';
 import { styles } from './ExerciseDetailsStyles';
+import Header from './Header';
 import StepperInput from './StepperInput';
 
 const ExerciseDetails = ({ route, navigation }) => {
@@ -82,20 +81,13 @@ const ExerciseDetails = ({ route, navigation }) => {
         imageStyle={styles.backgroundImageOpacity}
         style={styles.background}>
         <View style={styles.innerContainer}>
-          <Text style={styles.header}>{exercise.name}</Text>
-          <View>
-            <TouchableOpacity style={[styles.runButton, !timers.length && styles.runButtonDisabled]} onPress={running ? stopExercise : startExercise}>
-              {!running ?
-                <>
-                  <Icon name="play-outline" size={24} color="#fff" />
-                  <Text style={styles.buttonText}>Start</Text>
-                </> :
-                <>
-                  <Icon name="stop-outline" size={24} color="#fff" />
-                  <Text style={styles.buttonText}>{`Stop ${currentRepeat} / ${repeatCount}`}</Text>
-                </>
-              }
-            </TouchableOpacity>
+          <Header text={exercise.name} />
+          <View style={styles.runButton}>
+            {!running ?
+              <Button text="Start" iconName="play-outline" onPress={startExercise} backgroundColor='#5ba4a4' disabled={!timers.length} />
+              :
+              <Button text={`Stop ${currentRepeat} / ${repeatCount}`} iconName='stop-outline' onPress={stopExercise} backgroundColor='#5ba4a4' />
+            }
           </View>
           <View style={styles.inputsContainer}>
             <TextInput
@@ -109,9 +101,7 @@ const ExerciseDetails = ({ route, navigation }) => {
               placeholder="Exercise Name"
               editable={!running}
             />
-            <View style={styles.stepperContainer}>
-              <StepperInput value={repeatCount} onChange={setRepeatCount} disabled={running} />
-            </View>
+            <StepperInput value={repeatCount} onChange={setRepeatCount} disabled={running} />
           </View>
           <DraggableFlatList
             data={timers}
@@ -119,14 +109,12 @@ const ExerciseDetails = ({ route, navigation }) => {
             renderItem={renderItem}
             onDragEnd={({ data }) => setTimers(data)}
           />
-          <View style={styles.buttonContainer}>
-            {!running && !exerciseId && (
-              <>
-                <Button text="Save" iconName="checkmark-outline" onPress={saveExercise} backgroundColor={colors.primary} disabled={name.length === 0} />
-                <Button text="Cancel" iconName="close-outline" onPress={() => navigation.goBack()} backgroundColor={colors.secondary} />
-              </>
-            )}
-          </View>
+          {!running && !exerciseId && (
+            <View style={styles.buttonContainer}>
+              <Button text="Save" iconName="checkmark-outline" onPress={saveExercise} backgroundColor={colors.primary} disabled={name.length === 0} />
+              <Button text="Cancel" iconName="close-outline" onPress={() => navigation.goBack()} backgroundColor={colors.secondary} />
+            </View>
+          )}
         </View>
       </ImageBackground>
       {!running && exerciseId &&

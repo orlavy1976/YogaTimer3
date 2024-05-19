@@ -1,10 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import * as Progress from 'react-native-progress';
 import colors from '../styles/colors';
 import Card from './Card';
 import CustomIcon from './CustomIcon';
-import { styles } from './ExerciseDetailsStyles';
 import IconButton from './IconButton';
 import Label from './Label';
 
@@ -56,5 +55,28 @@ const TimerItem = ({ item, timers, remainingTime, currentLoop, running, timerRef
     </Card>
   );
 };
+
+const styles = StyleSheet.create({
+  timerItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  timerLeftSide: {
+    flexDirection: 'row',
+    alignItems: 'left',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 4,
+  },
+  progressBarContainer: {
+    flex: 1,
+    width: '100%',
+  },
+  progressBar: {
+    marginTop: 10,
+  },
+});
 
 export default TimerItem;

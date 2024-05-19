@@ -15,13 +15,6 @@ export const styles = StyleSheet.create({
   innerContainer: {
     padding: 20,
   },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: colors.primary,
-    marginBottom: 20,
-    textAlign: 'center',
-  },
   exerciseItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -35,12 +28,5 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
-  },
-  exerciseTimers: {
-    fontSize: 14,
-    color: colors.textPrimary,
-  },
-  dragging: {
-    opacity: 0.3,
-  },
+  }
 });

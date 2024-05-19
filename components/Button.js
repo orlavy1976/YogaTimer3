@@ -10,7 +10,7 @@ const Button = ({ onPress, backgroundColor, text, iconName, style, disabled }) =
       onPress={onPress}
       disabled={disabled}
     >
-      {iconName && <Icon name={iconName} size={24} color="#fff" />}
+      {iconName && <Icon name={iconName} size={24} color={colors.iconColor} />}
       {text && <Text style={styles.buttonText}>{text}</Text>}
     </TouchableOpacity>
   );
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 5,
   },
   buttonText: {
     fontSize: 18,

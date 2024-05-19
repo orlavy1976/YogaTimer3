@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Switch, Text, View } from 'react-native';
+import { StyleSheet, Switch, View } from 'react-native';
 import { GlobalContext } from '../context/GlobalProvider';
 import colors from '../styles/colors';
 import Button from './Button';
+import Header from './Header';
 import Label from './Label';
 import StepperInput from './StepperInput';
-import { styles } from './TimerDetailsStyles';
 
 const TimerDetails = ({ route, navigation }) => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -30,7 +30,7 @@ const TimerDetails = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Timer Details</Text>
+      <Header text='Timer Details' />
       <StepperInput label='Duration (seconds)' value={duration} onChange={(text) => setDuration(Number(text))} />
       <StepperInput label='Loop Count' value={loopCount} onChange={(text) => setLoopCount(Number(text))} />
       <View style={styles.switchContainer}>
@@ -48,5 +48,22 @@ const TimerDetails = ({ route, navigation }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+    padding: 20,
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+});
 
 export default TimerDetails;
