@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../styles/colors';
 
 export const styles = StyleSheet.create({
   background: {
@@ -9,7 +10,7 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: colors.background,
   },
   innerContainer: {
     padding: 20,
@@ -17,13 +18,13 @@ export const styles = StyleSheet.create({
   header: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '6a4c93',
+    color: colors.primary,
     marginBottom: 20,
     textAlign: 'center',
   },
   input: {
     height: 40,
-    borderColor: '#6a4c93',
+    borderColor: colors.primary,
     borderWidth: 1,
     borderRadius: 8,
     padding: 10,
@@ -34,10 +35,10 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     right: 20,
     bottom: 80,
-    backgroundColor: '#6a4c93',
-    borderRadius: 30, // making it round
-    width: 60, // equal width and height to make it circular
-    height: 60, // equal width and height to make it circular
+    backgroundColor: colors.primary,
+    borderRadius: 35, // making it round
+    width: 70, // equal width and height to make it circular
+    height: 70, // equal width and height to make it circular
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 5, // shadow for android
@@ -48,11 +49,11 @@ export const styles = StyleSheet.create({
   },
   addButtonIcon: {
     fontSize: 30,
-    color: '#fff',
+    color: colors.iconColor,
   },
   timerItemContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.cardBackground,
     padding: 15,
     borderRadius: 8,
     marginBottom: 10,
@@ -68,7 +69,7 @@ export const styles = StyleSheet.create({
   },
   timerDetail: {
     fontSize: 16,
-    color: '#333333',
+    color: colors.textPrimary,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -76,7 +77,7 @@ export const styles = StyleSheet.create({
     marginTop: 4,
   },
   iconButton: {
-    backgroundColor: '#b2947b',
+    backgroundColor: colors.secondary,
     padding: 10,
     borderRadius: 8,
     marginHorizontal: 5,
@@ -93,19 +94,6 @@ export const styles = StyleSheet.create({
   runButtonDisabled: {
     backgroundColor: '#b0d6d6'
   },
-  stopButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#d32f2f',
-    padding: 10,
-    borderRadius: 8,
-  },
-  runningText: {
-    fontSize: 18,
-    color: '#d32f2f',
-    fontWeight: 'bold',
-  },
   disabled: {
     opacity: 0.5,
   },
@@ -113,7 +101,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#b2947b', // soft brown color
+    backgroundColor: colors.secondary,
     padding: 10,
     borderRadius: 8,
     marginRight: 10,
@@ -122,7 +110,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#6a4c93', // purple color
+    backgroundColor: colors.primary,
     padding: 10,
     borderRadius: 8,
   },
@@ -133,6 +121,7 @@ export const styles = StyleSheet.create({
     marginLeft: 5,
   },
   progressBarContainer: {
+    flex: 1,
     width: '100%',
   },
   progressBar: {

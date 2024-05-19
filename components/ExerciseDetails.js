@@ -1,6 +1,6 @@
 // ExerciseDetails.js
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, Keyboard, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import DraggableFlatList from 'react-native-draggable-flatlist';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TimerItem from '../components/TimerItem';
@@ -10,7 +10,8 @@ import { styles } from './ExerciseDetailsStyles';
 
 const ExerciseDetails = ({ route, navigation }) => {
   const { state, dispatch } = useContext(GlobalContext);
-  const { exerciseId } = route.params || {};
+  const { exerciseId: routeExerciseId } = route.params || {};
+  const [exerciseId, setExerciseId] = useState(routeExerciseId);
   const exercise = state.exercises.find((ex) => ex.id === exerciseId) || { name: '', timers: [] };
   const [name, setName] = useState(exercise.name);
   const [timers, setTimers] = useState(exercise.timers);
@@ -34,13 +35,14 @@ const ExerciseDetails = ({ route, navigation }) => {
   }, [timers, exercise]);
 
   const saveExercise = () => {
-    const newExercise = { id: exerciseId || new Date().toISOString(), name, timers };
+    const newExercise = { id: exerciseId || Date.now(), name, timers };
     if (exerciseId) {
       dispatch({ type: 'EDIT_EXERCISE', payload: newExercise });
     } else {
       dispatch({ type: 'ADD_EXERCISE', payload: newExercise });
     }
-    navigation.goBack();
+    setExerciseId(newExercise.id);
+    Keyboard.dismiss();
   };
 
   const startExercise = () => {
@@ -123,14 +125,15 @@ const ExerciseDetails = ({ route, navigation }) => {
           </View>
         </View>
       </ImageBackground>
-      <View style={styles.addButton}>
-        <TouchableOpacity
-          onPress={() => !running && navigation.navigate('TimerDetails', { exerciseId: exerciseId || new Date().toISOString() })}
-          disabled={running}
-        >
-          <Icon name="add" style={styles.addButtonIcon} />
-        </TouchableOpacity>
-      </View>
+      {!running && exerciseId && (
+        <View style={styles.addButton}>
+          <TouchableOpacity
+            onPress={() => !running && navigation.navigate('TimerDetails', { exerciseId: exerciseId || new Date().toISOString() })}
+            disabled={running}
+          >
+            <Icon name="add" style={styles.addButtonIcon} />
+          </TouchableOpacity>
+        </View>)}
     </View>
   );
 };

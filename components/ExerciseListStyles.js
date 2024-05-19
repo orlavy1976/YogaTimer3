@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../styles/colors';
 
 export const styles = StyleSheet.create({
   background: {
@@ -9,6 +10,7 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    backgroundColor: colors.background,
   },
   innerContainer: {
     padding: 20,
@@ -16,7 +18,7 @@ export const styles = StyleSheet.create({
   header: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#6a4c93',
+    color: colors.primary,
     marginBottom: 20,
     textAlign: 'center',
   },
@@ -29,10 +31,10 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     right: 20,
     bottom: 80,
-    backgroundColor: '#6a4c93',
-    borderRadius: 30, // making it round
-    width: 60, // equal width and height to make it circular
-    height: 60, // equal width and height to make it circular
+    backgroundColor: colors.primary,
+    borderRadius: 35, // making it round
+    width: 70, // equal width and height to make it circular
+    height: 70, // equal width and height to make it circular
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 5, // shadow for android
@@ -42,19 +44,19 @@ export const styles = StyleSheet.create({
     shadowRadius: 8, // shadow for iOS
   },
   addButtonText: {
-    color: '#fff',
+    color: colors.iconColor,
     fontSize: 18,
     fontWeight: 'bold',
     marginLeft: 5,
   },
   exerciseItem: {
     flexDirection: 'row',
-    flex: 1,
+    alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#fff',
-    padding: 12,
+    backgroundColor: colors.cardBackground,
+    padding: 15,
     borderRadius: 8,
-    marginBottom: 10,
+    marginBottom: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
@@ -63,23 +65,24 @@ export const styles = StyleSheet.create({
   },
   exerciseLeftSide: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   exerciseName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333333',
+    color: '#333',
   },
   exerciseTimers: {
     fontSize: 14,
-    color: '#666666',
+    color: colors.textPrimary,
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 6,
+    justifyContent: 'flex-end',
+    marginLeft: 'auto',
   },
   iconButton: {
-    backgroundColor: '#b2947b',
+    backgroundColor: colors.secondary,
     padding: 10,
     borderRadius: 8,
     marginHorizontal: 5,

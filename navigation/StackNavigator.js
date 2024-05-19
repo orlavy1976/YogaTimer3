@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ExerciseDetails from '../components/ExerciseDetails';
 import ExerciseList from '../components/ExerciseList';
 import TimerDetails from '../components/TimerDetails';
+import colors from '../styles/colors';
 
 const Stack = createNativeStackNavigator();
 
@@ -11,7 +12,7 @@ export default function StackNavigator() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerTintColor: '#6a4c93',
+          headerTintColor: colors.primary,
           headerStyle: { backgroundColor: '#dddddd' },
         }}>
         <Stack.Screen name="ExerciseList" component={ExerciseList} options={{ title: 'Yoga Timer' }} />

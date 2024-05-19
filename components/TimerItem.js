@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import * as Progress from 'react-native-progress';
 import Icon from 'react-native-vector-icons/Ionicons';
+import colors from '../styles/colors';
 import { styles } from './ExerciseDetailsStyles';
 
 const TimerItem = ({ item, timers, remainingTime, currentLoop, running, timerRef, exerciseId, navigation, setTimers, dispatch, drag }) => {
@@ -30,7 +31,7 @@ const TimerItem = ({ item, timers, remainingTime, currentLoop, running, timerRef
             onPress={() => navigation.navigate('TimerDetails', { exerciseId, timerId: item.id })}
             disabled={running}
           >
-            <Icon name="pencil-outline" size={20} color="#fff" />
+            <Icon name="pencil-outline" size={20} color={colors.iconColor} />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.iconButton}
@@ -41,7 +42,7 @@ const TimerItem = ({ item, timers, remainingTime, currentLoop, running, timerRef
             }}
             disabled={running}
           >
-            <Icon name="trash-outline" size={20} color="#fff" />
+            <Icon name="trash-outline" size={20} color={colors.iconColor} />
           </TouchableOpacity>
         </View>
       </View>
@@ -49,7 +50,7 @@ const TimerItem = ({ item, timers, remainingTime, currentLoop, running, timerRef
         <Progress.Bar
           progress={progress}
           width={null}
-          color={'#6a4c93'}
+          color={colors.primary}
           style={styles.progressBar}
         />
       </View>

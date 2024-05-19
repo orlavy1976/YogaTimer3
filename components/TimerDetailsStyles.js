@@ -1,21 +1,22 @@
 import { StyleSheet } from 'react-native';
+import colors from '../styles/colors';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: colors.background,
     padding: 20,
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#6a4c93',
+    color: colors.primary,
     marginBottom: 20,
     textAlign: 'center',
   },
   label: {
     fontSize: 18,
-    color: '#333333',
+    color: colors.textPrimary,
     marginBottom: 10,
   },
   input: {
@@ -34,7 +35,7 @@ export const styles = StyleSheet.create({
   switchLabel: {
     flex: 1,
     fontSize: 16,
-    color: '#333333',
+    color: colors.textPrimary,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -44,7 +45,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#6a4c93',
+    backgroundColor: colors.primary,
     padding: 10,
     borderRadius: 8,
   },
@@ -52,12 +53,12 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#b2947b',
+    backgroundColor: colors.secondary,
     padding: 10,
     borderRadius: 8,
   },
   buttonText: {
-    color: '#fff',
+    color: colors.iconColor,
     fontSize: 16,
     marginLeft: 5,
   },
