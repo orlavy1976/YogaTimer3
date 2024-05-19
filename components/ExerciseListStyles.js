@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   backgroundImageOpacity: {
-    opacity: 0.2, // Adjust the opacity as needed
+    opacity: 0.2,
   },
   container: {
     flex: 1,
@@ -26,15 +26,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: colors.cardBackground,
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 2,
   },
   exerciseLeftSide: {
     flexDirection: 'row',

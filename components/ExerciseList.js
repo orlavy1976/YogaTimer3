@@ -4,6 +4,7 @@ import DraggableFlatList from 'react-native-draggable-flatlist';
 import { GlobalContext } from '../context/GlobalProvider';
 import getBestMatchingIcon from '../utils/getBestMatchingIcon';
 import AddButton from './AddButton';
+import Card from './Card';
 import CustomIcon from './CustomIcon';
 import { styles } from './ExerciseListStyles';
 import IconButton from './IconButton';
@@ -23,19 +24,21 @@ const ExerciseList = ({ navigation }) => {
   };
 
   const renderItem = ({ item, drag, isActive }) => (
-    <TouchableOpacity
-      onLongPress={drag}
-      onPress={() => navigation.navigate('ExerciseDetails', { exerciseId: item.id })}
-      style={[styles.exerciseItem, isActive && styles.dragging]}>
-      <View style={styles.exerciseLeftSide}>
-        <CustomIcon source={getBestMatchingIcon(item.name)} />
-        <View>
-          <Text style={styles.exerciseName}>{item.name}</Text>
-          <Label text={`Timers: ${item.timers.length}`} />
+    <Card>
+      <TouchableOpacity
+        onLongPress={drag}
+        onPress={() => navigation.navigate('ExerciseDetails', { exerciseId: item.id })}
+        style={[styles.exerciseItem, isActive && styles.dragging]}>
+        <View style={styles.exerciseLeftSide}>
+          <CustomIcon source={getBestMatchingIcon(item.name)} />
+          <View>
+            <Text style={styles.exerciseName}>{item.name}</Text>
+            <Label text={`Timers: ${item.timers.length}`} />
+          </View>
         </View>
-      </View>
-      <IconButton onPress={() => removeExercise(item.id)} name='trash-outline' />
-    </TouchableOpacity>
+        <IconButton onPress={() => removeExercise(item.id)} name='trash-outline' />
+      </TouchableOpacity>
+    </Card>
   );
 
   return (
