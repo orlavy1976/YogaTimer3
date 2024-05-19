@@ -87,4 +87,7 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     marginHorizontal: 5,
   },
+  dragging: {
+    opacity: 0.3,
+  },
 });
