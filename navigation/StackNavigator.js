@@ -13,7 +13,7 @@ export default function StackNavigator() {
       <Stack.Navigator
         screenOptions={{
           headerTintColor: colors.primary,
-          headerStyle: { backgroundColor: '#dddddd' },
+          headerStyle: { backgroundColor: '#fffde7' },
         }}>
         <Stack.Screen name="ExerciseList" component={ExerciseList} options={{ title: 'Yoga Timer' }} />
         <Stack.Screen name="ExerciseDetails" component={ExerciseDetails} options={{ title: 'Exercise Details' }} />
