@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { FlatList, Image, ImageBackground, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ImageBackground, Text, TouchableOpacity, View } from 'react-native';
+import DraggableFlatList from 'react-native-draggable-flatlist';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { GlobalContext } from '../context/GlobalProvider';
 import getBestMatchingIcon from '../utils/getBestMatchingIcon';
@@ -13,20 +14,27 @@ const ExerciseList = ({ navigation }) => {
     dispatch({ type: 'REMOVE_EXERCISE', payload: id });
   };
 
-  return (
+  const updateExercisesOrder = (data) => {
+    console.log('updateExercisesOrder', data);
+    dispatch({ type: 'UPDATE_EXERCISES_ORDER', payload: data });
+  };
 
+  return (
     <View style={styles.container}>
       <ImageBackground
         source={require('../assets/background.jpg')}
         imageStyle={styles.backgroundImageOpacity}
         style={styles.background}>
         <View style={styles.innerContainer}>
-          <FlatList
+          <DraggableFlatList
             data={exercises}
             keyExtractor={(item) => item.id}
-            renderItem={({ item, index }) => (
+            onDragEnd={({ data }) => updateExercisesOrder(data)}
+            renderItem={({ item, drag }) => (
               <View style={styles.exerciseItem}>
-                <TouchableOpacity onPress={() => navigation.navigate('ExerciseDetails', { exerciseId: item.id })}>
+                <TouchableOpacity
+                  onLongPress={drag}
+                  onPress={() => navigation.navigate('ExerciseDetails', { exerciseId: item.id })}>
                   <View style={styles.exerciseLeftSide}>
                     <Image source={getBestMatchingIcon(item.name)} style={styles.customIcon} />
                     <View>
@@ -43,7 +51,6 @@ const ExerciseList = ({ navigation }) => {
               </View>
             )}
           />
-
         </View>
       </ImageBackground>
       <View style={styles.addButton}>
@@ -51,8 +58,7 @@ const ExerciseList = ({ navigation }) => {
           <Icon name="add" size={24} color="#fff" />
         </TouchableOpacity>
       </View>
-    </View >
-
+    </View>
   );
 };
 

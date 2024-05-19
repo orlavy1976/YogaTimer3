@@ -18,6 +18,11 @@ const reducer = (state, action) => {
           exercise.id === action.payload.id ? action.payload : exercise
         ),
       };
+    case 'UPDATE_EXERCISES_ORDER':
+      return {
+        ...state,
+        exercises: action.payload,
+      };
     case 'REMOVE_EXERCISE':
       return { ...state, exercises: state.exercises.filter((exercise) => exercise.id !== action.payload) };
     case 'ADD_TIMER':
