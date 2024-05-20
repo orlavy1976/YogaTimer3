@@ -25,6 +25,17 @@ const useExerciseTimer = (timers, running, setRunning, repeatCount) => {
     };
   }, [running]);
 
+  useEffect(() => {
+    if (!timerRef.current) return;
+    const { loop: timerLoop } = timerRef.current;
+    if (timerLoop > 1 && currentLoop === timerLoop && remainingTime <= 2) {
+      if (remainingTime === 0) {
+        return;
+      }
+      playSound(require('../assets/bell.wav'));
+    }
+  }, [remainingTime]);
+
   const playSound = async (soundFile) => {
     try {
       const { sound } = await Audio.Sound.createAsync(soundFile);
@@ -40,7 +51,7 @@ const useExerciseTimer = (timers, running, setRunning, repeatCount) => {
 
       for (let timer of timers) {
         timerRef.current = timer;
-        for (let i = currentLoop; i <= timer.loop; i++) {
+        for (let i = 1; i <= timer.loop; i++) {
           if (!running) return;
           setRemainingTime(timer.duration);
 
@@ -56,13 +67,14 @@ const useExerciseTimer = (timers, running, setRunning, repeatCount) => {
                   resolve();
                   return 0;
                 }
+
                 return prev - 1;
               });
             }, 1000);
 
             timeoutRef.current = setTimeout(async () => {
               clearInterval(intervalRef.current);
-              if (timer.soundAtEnd) {
+              if (timer.soundAtEnd || (timer.loop > 1 && i === timer.loop)) {
                 await playSound(require('../assets/bell.wav'));
               }
               resolve();
@@ -78,7 +90,9 @@ const useExerciseTimer = (timers, running, setRunning, repeatCount) => {
     }
     setRunning(false);
     setCurrentRepeat(1);
-    timerRef.current = null;
+    setTimeout(() => {
+      timerRef.current = null;
+    }, 5000);
   };
 
   return {
