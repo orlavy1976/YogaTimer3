@@ -40,6 +40,11 @@ const useExerciseTimer = (timers, running, setRunning, repeatCount) => {
     try {
       const { sound } = await Audio.Sound.createAsync(soundFile);
       await sound.playAsync();
+      sound.setOnPlaybackStatusUpdate((status) => {
+        if (status.didJustFinish) {
+          sound.unloadAsync(); // Unload sound after playback
+        }
+      });
     } catch (error) {
       console.error('Error playing sound:', error);
     }
